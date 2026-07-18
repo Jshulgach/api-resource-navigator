@@ -96,6 +96,7 @@ export function ThemeSettings() {
                   </button>
                 ))}
               </div>
+              <a className="mt-4 block text-sm font-semibold text-spruce underline" href="/admin">Open demo dashboard</a>
             </div>
           )}
         </div>
