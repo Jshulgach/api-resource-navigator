@@ -2,11 +2,13 @@ import { Chat } from "@/components/Chat";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { ResourceBrowser } from "@/components/ResourceBrowser";
+import { SavedResourcesProvider } from "@/components/SavedResources";
 
 export default function Home() {
   return (
     <div className="min-h-screen text-ink">
       <Header />
+      <SavedResourcesProvider>
       <main>
         <section className="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:py-14">
           <div className="mx-auto max-w-2xl text-center">
@@ -28,6 +30,7 @@ export default function Home() {
           </div>
         </section>
       </main>
+      </SavedResourcesProvider>
       <Footer />
     </div>
   );

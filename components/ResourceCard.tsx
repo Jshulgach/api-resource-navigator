@@ -1,3 +1,6 @@
+"use client";
+
+import { useSavedResources } from "@/components/SavedResources";
 import type { Resource, ResourceWithScore } from "@/types/resource";
 
 type ResourceCardProps = {
@@ -5,6 +8,9 @@ type ResourceCardProps = {
 };
 
 export function ResourceCard({ resource }: ResourceCardProps) {
+  const { isSaved, toggleSaved } = useSavedResources();
+  const saved = isSaved(resource.id);
+
   return (
     <article className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
       <div className="flex flex-wrap items-center gap-2">
@@ -14,8 +20,9 @@ export function ResourceCard({ resource }: ResourceCardProps) {
         {resource.geography ? <span className="text-xs text-slate-500">{resource.geography}</span> : null}
       </div>
       <h3 className="mt-3 text-base font-bold text-ink">{resource.title}</h3>
-      {resource.organization ? <p className="mt-1 text-sm text-slate-600">{resource.organization}</p> : null}
+      {resource.organization ? <p className="mt-1 text-sm text-slate-600">Source: {resource.organization}</p> : null}
       <p className="mt-3 text-sm leading-6 text-slate-700">{resource.summary}</p>
+      {resource.last_verified_date ? <p className="mt-3 text-xs text-slate-500">Last reviewed: {new Date(`${resource.last_verified_date}T00:00:00`).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}</p> : null}
       <div className="mt-4 flex flex-wrap gap-2">
         {resource.url ? (
           <a
@@ -27,6 +34,7 @@ export function ResourceCard({ resource }: ResourceCardProps) {
             Open resource
           </a>
         ) : null}
+        {resource.url ? <button className="rounded-md border border-slate-300 px-3 py-2 text-sm font-semibold text-spruce" type="button" onClick={() => toggleSaved(resource)}>{saved ? "Saved" : "Save step"}</button> : null}
         {resource.phone ? <span className="px-3 py-2 text-sm text-slate-700">{resource.phone}</span> : null}
       </div>
     </article>

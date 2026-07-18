@@ -6,6 +6,7 @@ import { ChatMessage } from "@/components/ChatMessage";
 import { ContextSummary } from "@/components/ContextSummary";
 import { QuickStartButtons } from "@/components/QuickStartButtons";
 import { ResourceCard } from "@/components/ResourceCard";
+import { SavedResources } from "@/components/SavedResources";
 import { WelcomePaths } from "@/components/WelcomePaths";
 import type { ResourceWithScore } from "@/types/resource";
 
@@ -87,6 +88,8 @@ export function Chat() {
             </div>
           </div>
         ) : null}
+
+        <SavedResources />
 
         {error ? (
           <div className="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-800">

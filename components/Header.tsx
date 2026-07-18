@@ -1,3 +1,4 @@
+import { DisplaySettings } from "@/components/DisplaySettings";
 import { ThemeSettings } from "@/components/ThemeSettings";
 
 export function Header() {
@@ -14,6 +15,7 @@ export function Header() {
           <a className="hover:text-spruce" href="#resources">
             Resources
           </a>
+          <DisplaySettings />
           <ThemeSettings />
         </nav>
       </div>

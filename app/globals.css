@@ -29,6 +29,31 @@
   --color-skysoft: 220 235 247;
 }
 
+:root[data-text-size="large"] {
+  font-size: 112.5%;
+}
+
+:root[data-contrast="high"] {
+  --color-ink: 0 0 0;
+  --color-mist: 255 255 255;
+  --color-spruce: 0 60 110;
+  --color-clay: 142 35 36;
+  --color-skysoft: 222 241 255;
+}
+
+:root[data-reduced-motion="true"] {
+  scroll-behavior: auto;
+}
+
+:root[data-reduced-motion="true"] *,
+:root[data-reduced-motion="true"] *::before,
+:root[data-reduced-motion="true"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  scroll-behavior: auto !important;
+  transition-duration: 0.01ms !important;
+}
+
 * {
   box-sizing: border-box;
 }
