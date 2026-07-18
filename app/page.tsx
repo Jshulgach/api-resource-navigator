@@ -9,7 +9,7 @@ export default function Home() {
     <div className="min-h-screen text-ink">
       <Header />
       <main>
-        <section className="mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:px-6 lg:grid-cols-[0.92fr_1.08fr] lg:py-14">
+        <section className="mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:px-6 lg:grid-cols-[0.78fr_1.22fr] lg:py-14">
           <div className="flex flex-col justify-center gap-6">
             <div>
               <p className="mb-3 text-sm font-bold uppercase tracking-wide text-clay">
@@ -22,6 +22,10 @@ export default function Home() {
                 A nonprofit resource navigator for people with limb loss, caregivers, clinicians,
                 and community members.
               </p>
+            </div>
+            <div className="rounded-lg border border-white/80 bg-white/60 p-5 shadow-sm">
+              <p className="text-sm font-semibold text-spruce">A calmer way to begin</p>
+              <p className="mt-2 text-sm leading-6 text-slate-700">You can explore at your own pace, choose what to share, and come back to practical next steps whenever you need them.</p>
             </div>
             <SafetyNotice />
           </div>

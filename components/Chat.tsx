@@ -4,8 +4,10 @@ import { useRef, useState } from "react";
 import { useChat } from "@ai-sdk/react";
 import { ChatMessage } from "@/components/ChatMessage";
 import { ContextSummary } from "@/components/ContextSummary";
+import { HowItWorks } from "@/components/HowItWorks";
 import { QuickStartButtons } from "@/components/QuickStartButtons";
 import { ResourceCard } from "@/components/ResourceCard";
+import { WelcomePaths } from "@/components/WelcomePaths";
 import type { ResourceWithScore } from "@/types/resource";
 
 async function fetchResourceCards(prompt: string, excludedIds: string[]) {
@@ -61,15 +63,17 @@ export function Chat() {
           </p>
         </div>
 
+        {messages.length === 0 ? <WelcomePaths onChoose={submitPrompt} /> : null}
+
         <QuickStartButtons onSelect={submitPrompt} />
 
         <ContextSummary messages={messages} />
 
         <div className="min-h-[340px] space-y-3 rounded-lg bg-mist p-3" aria-live="polite">
           {messages.length === 0 ? (
-            <div className="rounded-lg border border-dashed border-slate-300 bg-white p-4 text-sm leading-6 text-slate-600">
-              Choose a quick-start question or ask your own. The navigator will keep answers general,
-              practical, and source-linked.
+            <div className="rounded-lg border border-dashed border-slate-300 bg-white p-5 text-sm leading-6 text-slate-600">
+              <p className="font-semibold text-ink">We can begin with one small next step.</p>
+              <p className="mt-2">Choose a path above, select a topic, or write in your own words. You never need to tell your whole story here.</p>
             </div>
           ) : (
             messages.map((message) => <ChatMessage key={message.id} message={message} />)
@@ -120,6 +124,8 @@ export function Chat() {
             </button>
           </div>
         </form>
+
+        <HowItWorks />
 
         <div className="flex gap-2 text-sm">
           <button className="rounded-md border border-slate-300 px-3 py-2 text-slate-700" type="button">
