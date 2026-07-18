@@ -12,9 +12,9 @@ export function ResourceCard({ resource }: ResourceCardProps) {
   const saved = isSaved(resource.id);
 
   return (
-    <article className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+    <article className="border-t border-slate-200 py-5 first:border-t-0">
       <div className="flex flex-wrap items-center gap-2">
-        <span className="rounded-full bg-skysoft px-2.5 py-1 text-xs font-semibold uppercase text-spruce">
+        <span className="text-xs font-semibold uppercase tracking-wide text-spruce">
           {resource.category.replaceAll("_", " ")}
         </span>
         {resource.geography ? <span className="text-xs text-slate-500">{resource.geography}</span> : null}
@@ -34,7 +34,7 @@ export function ResourceCard({ resource }: ResourceCardProps) {
             Open resource
           </a>
         ) : null}
-        {resource.url ? <button className="rounded-md border border-slate-300 px-3 py-2 text-sm font-semibold text-spruce" type="button" onClick={() => toggleSaved(resource)}>{saved ? "Saved" : "Save step"}</button> : null}
+        {resource.url ? <button className="rounded-md border border-slate-300 px-3 py-2 text-sm font-semibold text-spruce transition hover:border-spruce hover:bg-skysoft/30" type="button" onClick={() => toggleSaved(resource)}>{saved ? "Saved" : "Save step"}</button> : null}
         {resource.phone ? <span className="px-3 py-2 text-sm text-slate-700">{resource.phone}</span> : null}
       </div>
     </article>
