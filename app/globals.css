@@ -89,3 +89,25 @@ textarea {
   outline: 3px solid rgb(var(--color-clay));
   outline-offset: 3px;
 }
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .appointment-plan,
+  .appointment-plan * {
+    visibility: visible;
+  }
+
+  .appointment-plan {
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+
+  .no-print {
+    display: none;
+  }
+}

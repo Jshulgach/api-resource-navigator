@@ -9,6 +9,7 @@ export function Footer() {
         <nav aria-label="Footer navigation" className="flex shrink-0 flex-wrap gap-x-4 gap-y-2 text-sm">
           <a className="text-spruce underline" href="/terms">Terms of use</a>
           <a className="text-spruce underline" href="/privacy">Privacy</a>
+          <a className="text-spruce underline" href="/trust">Trust and maintenance</a>
           <a className="text-spruce underline" href="/sources">Guides and sources</a>
         </nav>
       </div>

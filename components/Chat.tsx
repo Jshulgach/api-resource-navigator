@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { useChat } from "@ai-sdk/react";
 import { ChatMessage } from "@/components/ChatMessage";
+import { AppointmentPrep } from "@/components/AppointmentPrep";
 import { ContextSummary } from "@/components/ContextSummary";
 import { QuickStartButtons } from "@/components/QuickStartButtons";
 import { ResourceCard } from "@/components/ResourceCard";
@@ -28,8 +29,9 @@ async function fetchResourceCards(prompt: string, excludedIds: string[]) {
 export function Chat() {
   const [resources, setResources] = useState<ResourceWithScore[]>([]);
   const [showCommonQuestions, setShowCommonQuestions] = useState(false);
+  const [showContext, setShowContext] = useState(false);
   const seenResourceIds = useRef<Set<string>>(new Set());
-  const { messages, input, handleInputChange, handleSubmit, append, isLoading, error } = useChat({
+  const { messages, input, handleInputChange, handleSubmit, append, isLoading, error, setInput, setMessages } = useChat({
     api: "/api/chat"
   });
 
@@ -53,6 +55,15 @@ export function Chat() {
     handleSubmit(event);
   }
 
+  function startOver() {
+    setMessages([]);
+    setInput("");
+    setResources([]);
+    seenResourceIds.current.clear();
+    setShowCommonQuestions(false);
+    setShowContext(false);
+  }
+
   return (
     <section id="chat" className="rounded-lg border border-slate-200 bg-white p-4 shadow-soft sm:p-5">
       <div className="flex flex-col gap-5">
@@ -67,7 +78,14 @@ export function Chat() {
           </div>
         ) : null}
 
-        {messages.length > 0 ? <ContextSummary messages={messages} /> : null}
+        {messages.length > 0 ? (
+          <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm">
+            <button className="font-semibold text-spruce underline" type="button" onClick={() => setShowContext((value) => !value)}>{showContext ? "Hide what I remember" : "What I remember"}</button>
+            <button className="font-semibold text-spruce underline" type="button" onClick={startOver}>Start a new conversation</button>
+          </div>
+        ) : null}
+
+        {messages.length > 0 && showContext ? <ContextSummary messages={messages} /> : null}
 
         {messages.length > 0 || isLoading ? (
           <div className="min-h-[180px] space-y-3 rounded-lg bg-mist p-3" aria-live="polite">
@@ -90,6 +108,8 @@ export function Chat() {
         ) : null}
 
         <SavedResources />
+
+        {messages.length > 0 ? <AppointmentPrep /> : null}
 
         {error ? (
           <div className="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-800">
@@ -127,8 +147,8 @@ export function Chat() {
           <button className="rounded-md border border-slate-300 px-3 py-2 text-slate-700" type="button">
             Not helpful
           </button>
-          <a className="px-3 py-2 text-spruce underline" href="mailto:info@example.org">
-            Report an issue
+          <a className="px-3 py-2 text-spruce underline" href="/trust#feedback">
+            Report a resource concern
           </a>
         </div> : null}
       </div>
