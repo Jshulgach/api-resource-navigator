@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 const themes = [
-  { id: "default", label: "Quiet teal", colors: ["#215c55", "#b85c38", "#d8ecf3"] },
+  { id: "default", label: "Red, silver, white", colors: ["#7e1d29", "#e5e7eb", "#ffffff"] },
   { id: "meadow", label: "Meadow", colors: ["#33684c", "#b3464b", "#dbeddb"] },
   { id: "harbor", label: "Harbor", colors: ["#2a5b80", "#b6525b", "#dcebf7"] }
 ];

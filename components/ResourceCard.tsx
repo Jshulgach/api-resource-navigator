@@ -26,7 +26,7 @@ export function ResourceCard({ resource }: ResourceCardProps) {
       <div className="mt-4 flex flex-wrap gap-2">
         {resource.url ? (
           <a
-            className="rounded-md bg-spruce px-3 py-2 text-sm font-semibold text-white transition hover:bg-teal-800"
+            className="rounded-md bg-spruce px-3 py-2 text-sm font-semibold text-white transition hover:opacity-90"
             href={resource.url}
             rel="noreferrer"
             target="_blank"

@@ -129,9 +129,9 @@ export function Chat() {
             placeholder="Or write what is on your mind..."
           />
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-xs leading-5 text-slate-500">Please do not include personal or medical details.</p>
+            <p className="text-xs leading-5 text-slate-500">Keep it general - no names, ID numbers, or exact addresses.</p>
             <button
-              className="rounded-md bg-spruce px-4 py-2 text-sm font-semibold text-white transition hover:bg-teal-800 disabled:cursor-not-allowed disabled:bg-slate-400"
+              className="rounded-md bg-spruce px-4 py-2 text-sm font-semibold text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:bg-slate-400"
               disabled={isLoading}
               type="submit"
             >

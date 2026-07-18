@@ -4,11 +4,11 @@
 
 :root {
   color-scheme: light;
-  --color-ink: 31 41 51;
-  --color-mist: 245 247 248;
-  --color-spruce: 33 92 85;
-  --color-clay: 184 92 56;
-  --color-skysoft: 216 236 243;
+  --color-ink: 35 37 41;
+  --color-mist: 244 245 246;
+  --color-spruce: 126 29 41;
+  --color-clay: 181 47 58;
+  --color-skysoft: 229 231 235;
   background: rgb(var(--color-mist));
   color: rgb(var(--color-ink));
 }
