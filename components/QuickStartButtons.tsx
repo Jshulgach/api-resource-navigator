@@ -1,7 +1,6 @@
 "use client";
 
 const quickPrompts = [
-  "I am new to limb loss. Where should I start?",
   "How do I find a prosthetist near me?",
   "Will insurance cover a prosthetic device?",
   "I need help paying for a prosthesis.",
@@ -17,7 +16,7 @@ type QuickStartButtonsProps = {
 
 export function QuickStartButtons({ onSelect }: QuickStartButtonsProps) {
   return (
-    <div className="flex flex-wrap gap-2" aria-label="Quick start questions">
+    <div className="flex flex-wrap gap-2 border-t border-slate-100 pt-3" aria-label="Common questions">
       {quickPrompts.map((prompt) => (
         <button
           className="rounded-full border border-slate-300 bg-white px-3 py-2 text-left text-sm font-medium text-slate-700 shadow-sm transition hover:border-spruce hover:text-spruce"

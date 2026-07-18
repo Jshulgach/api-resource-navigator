@@ -4,7 +4,6 @@ import { useRef, useState } from "react";
 import { useChat } from "@ai-sdk/react";
 import { ChatMessage } from "@/components/ChatMessage";
 import { ContextSummary } from "@/components/ContextSummary";
-import { HowItWorks } from "@/components/HowItWorks";
 import { QuickStartButtons } from "@/components/QuickStartButtons";
 import { ResourceCard } from "@/components/ResourceCard";
 import { WelcomePaths } from "@/components/WelcomePaths";
@@ -27,6 +26,7 @@ async function fetchResourceCards(prompt: string, excludedIds: string[]) {
 
 export function Chat() {
   const [resources, setResources] = useState<ResourceWithScore[]>([]);
+  const [showCommonQuestions, setShowCommonQuestions] = useState(false);
   const seenResourceIds = useRef<Set<string>>(new Set());
   const { messages, input, handleInputChange, handleSubmit, append, isLoading, error } = useChat({
     api: "/api/chat"
@@ -54,32 +54,26 @@ export function Chat() {
 
   return (
     <section id="chat" className="rounded-lg border border-slate-200 bg-white p-4 shadow-soft sm:p-5">
-      <div className="flex flex-col gap-4">
-        <div>
-          <h2 className="text-lg font-bold text-ink">Ask the resource navigator</h2>
-          <p className="mt-1 text-sm text-slate-600">
-            Ask about prosthetics, amputation care, insurance, support groups, financial help, or
-            trusted resources.
-          </p>
-        </div>
-
+      <div className="flex flex-col gap-5">
         {messages.length === 0 ? <WelcomePaths onChoose={submitPrompt} /> : null}
 
-        <QuickStartButtons onSelect={submitPrompt} />
+        {messages.length === 0 ? (
+          <div>
+            <button className="text-sm font-semibold text-spruce underline" type="button" onClick={() => setShowCommonQuestions((value) => !value)}>
+              {showCommonQuestions ? "Hide common questions" : "See common questions"}
+            </button>
+            {showCommonQuestions ? <div className="mt-3"><QuickStartButtons onSelect={submitPrompt} /></div> : null}
+          </div>
+        ) : null}
 
-        <ContextSummary messages={messages} />
+        {messages.length > 0 ? <ContextSummary messages={messages} /> : null}
 
-        <div className="min-h-[340px] space-y-3 rounded-lg bg-mist p-3" aria-live="polite">
-          {messages.length === 0 ? (
-            <div className="rounded-lg border border-dashed border-slate-300 bg-white p-5 text-sm leading-6 text-slate-600">
-              <p className="font-semibold text-ink">We can begin with one small next step.</p>
-              <p className="mt-2">Choose a path above, select a topic, or write in your own words. You never need to tell your whole story here.</p>
-            </div>
-          ) : (
-            messages.map((message) => <ChatMessage key={message.id} message={message} />)
-          )}
+        {messages.length > 0 || isLoading ? (
+          <div className="min-h-[180px] space-y-3 rounded-lg bg-mist p-3" aria-live="polite">
+            {messages.map((message) => <ChatMessage key={message.id} message={message} />)}
           {isLoading ? <p className="text-sm text-slate-600">Writing a careful answer...</p> : null}
-        </div>
+          </div>
+        ) : null}
 
         {resources.length > 0 ? (
           <div>
@@ -109,12 +103,10 @@ export function Chat() {
             className="min-h-24 w-full resize-y rounded-lg border border-slate-300 bg-white p-3 text-sm leading-6 text-ink shadow-sm"
             value={input}
             onChange={handleInputChange}
-            placeholder="Ask about prosthetics, amputation care, insurance, support groups, financial help, or trusted resources..."
+            placeholder="Or write what is on your mind..."
           />
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-xs leading-5 text-slate-500">
-              Avoid entering names, addresses, insurance IDs, medical record numbers, or photos.
-            </p>
+            <p className="text-xs leading-5 text-slate-500">Please do not include personal or medical details.</p>
             <button
               className="rounded-md bg-spruce px-4 py-2 text-sm font-semibold text-white transition hover:bg-teal-800 disabled:cursor-not-allowed disabled:bg-slate-400"
               disabled={isLoading}
@@ -125,9 +117,7 @@ export function Chat() {
           </div>
         </form>
 
-        <HowItWorks />
-
-        <div className="flex gap-2 text-sm">
+        {messages.length > 0 ? <div className="flex gap-2 text-sm">
           <button className="rounded-md border border-slate-300 px-3 py-2 text-slate-700" type="button">
             Helpful
           </button>
@@ -137,7 +127,7 @@ export function Chat() {
           <a className="px-3 py-2 text-spruce underline" href="mailto:info@example.org">
             Report an issue
           </a>
-        </div>
+        </div> : null}
       </div>
     </section>
   );

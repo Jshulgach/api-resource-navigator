@@ -17,6 +17,7 @@ const categories = [
 
 export function ResourceBrowser() {
   const [resources, setResources] = useState<Resource[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
   const [category, setCategory] = useState("");
   const [query, setQuery] = useState("");
 
@@ -33,6 +34,9 @@ export function ResourceBrowser() {
   }, [category, query]);
 
   useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
     let isCurrent = true;
     fetch(url)
       .then((response) => response.json())
@@ -45,19 +49,21 @@ export function ResourceBrowser() {
     return () => {
       isCurrent = false;
     };
-  }, [url]);
+  }, [isOpen, url]);
 
   return (
     <section id="resources" className="space-y-5">
-      <div>
-        <h2 className="text-2xl font-bold text-ink">Browse trusted starting points</h2>
-        <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">
-          These are the national resources seeded into the first prototype. More local and
-          state-specific resources can be added as the library grows.
-        </p>
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <h2 className="text-xl font-bold text-ink">Browse resources</h2>
+          <p className="mt-1 text-sm text-slate-600">Explore the library when you are ready.</p>
+        </div>
+        <button className="w-fit rounded-md border border-slate-300 bg-white px-3 py-2 text-sm font-semibold text-spruce" type="button" onClick={() => setIsOpen((value) => !value)}>
+          {isOpen ? "Hide library" : "Browse library"}
+        </button>
       </div>
 
-      <div className="grid gap-3 rounded-lg border border-slate-200 bg-white p-4 sm:grid-cols-[220px_1fr]">
+      {isOpen ? <><div className="grid gap-3 rounded-lg border border-slate-200 bg-white p-4 sm:grid-cols-[220px_1fr]">
         <label className="text-sm font-semibold text-slate-700">
           Category
           <select
@@ -88,6 +94,7 @@ export function ResourceBrowser() {
           <ResourceCard key={resource.id} resource={resource} />
         ))}
       </div>
+      </> : null}
     </section>
   );
 }

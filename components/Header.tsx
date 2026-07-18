@@ -1,3 +1,5 @@
+import { ThemeSettings } from "@/components/ThemeSettings";
+
 export function Header() {
   return (
     <header className="border-b border-slate-200 bg-white/85 backdrop-blur">
@@ -12,6 +14,7 @@ export function Header() {
           <a className="hover:text-spruce" href="#resources">
             Resources
           </a>
+          <ThemeSettings />
         </nav>
       </div>
     </header>

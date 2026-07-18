@@ -9,11 +9,11 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        ink: "#1f2933",
-        mist: "#f5f7f8",
-        spruce: "#215c55",
-        clay: "#b85c38",
-        skysoft: "#d8ecf3"
+        ink: "rgb(var(--color-ink) / <alpha-value>)",
+        mist: "rgb(var(--color-mist) / <alpha-value>)",
+        spruce: "rgb(var(--color-spruce) / <alpha-value>)",
+        clay: "rgb(var(--color-clay) / <alpha-value>)",
+        skysoft: "rgb(var(--color-skysoft) / <alpha-value>)"
       },
       boxShadow: {
         soft: "0 18px 45px rgba(31, 41, 51, 0.08)"

@@ -4,8 +4,29 @@
 
 :root {
   color-scheme: light;
-  background: #f5f7f8;
-  color: #1f2933;
+  --color-ink: 31 41 51;
+  --color-mist: 245 247 248;
+  --color-spruce: 33 92 85;
+  --color-clay: 184 92 56;
+  --color-skysoft: 216 236 243;
+  background: rgb(var(--color-mist));
+  color: rgb(var(--color-ink));
+}
+
+:root[data-theme="meadow"] {
+  --color-ink: 35 53 45;
+  --color-mist: 246 248 242;
+  --color-spruce: 51 104 76;
+  --color-clay: 179 70 75;
+  --color-skysoft: 219 237 219;
+}
+
+:root[data-theme="harbor"] {
+  --color-ink: 29 43 65;
+  --color-mist: 246 248 252;
+  --color-spruce: 42 91 128;
+  --color-clay: 182 82 91;
+  --color-skysoft: 220 235 247;
 }
 
 * {
@@ -20,8 +41,8 @@ body {
   min-height: 100vh;
   margin: 0;
   background:
-    linear-gradient(180deg, rgba(216, 236, 243, 0.65), rgba(245, 247, 248, 0) 360px),
-    #f5f7f8;
+    linear-gradient(180deg, rgb(var(--color-skysoft) / 0.7), rgb(var(--color-mist) / 0) 360px),
+    rgb(var(--color-mist));
   font-family:
     Arial,
     Helvetica,
@@ -40,6 +61,6 @@ textarea {
 }
 
 :focus-visible {
-  outline: 3px solid #b85c38;
+  outline: 3px solid rgb(var(--color-clay));
   outline-offset: 3px;
 }
